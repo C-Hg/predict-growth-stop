@@ -1,0 +1,19 @@
+{
+  "name": "predictgrowthstop",
+  "version": "1.0.0",
+  "description": "A web app to predict a growth stop for teenagers, based on the area between the expected weight and actual weight curves.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Camille Hagenbourger",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "styled-components": "^5.1.1"
+  }
+}
