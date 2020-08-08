@@ -7,13 +7,5 @@
     "test": "test"
   },
   "author": "Camille Hagenbourger",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
-  },
-  "dependencies": {
-    "styled-components": "^5.1.1"
-  }
+  "license": "MIT"
 }

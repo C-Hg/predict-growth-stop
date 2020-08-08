@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider } from "styled-components";
 
-function App() {
+import Title from "./components/Title";
+import theme from "./styles/theme";
+
+// TODO: a component for each type of cell (age, expected and actual weight)
+// weight should be the same component but with a different state
+// finally, group the 3 cells in a single component, and perform the checks at this level
+// add legend cells
+// add interval selection with associated checks
+// bonus: graphic representation with react-chartjs-2
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Title />
+      {/* <Form /> collect data and display result*/}
+      {/* <About /> a few words about the study  */}
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

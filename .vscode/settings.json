@@ -1,0 +1,36 @@
+{
+    "cSpell.enabled": true,
+    "cSpell.showStatus": true,
+    "cSpell.language": "en,fr-FR",
+    "cSpell.logLevel": "Warning",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+      ],
+    "eslint.alwaysShowStatus": true,
+    "eslint.workingDirectories": [ "./webapp" ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "git.confirmSync": false,
+    "todo-tree.highlights.enabled": true,
+    "todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "text",
+        "foreground": "white",
+        "background": "green",
+        "opacity": 50,
+        "iconColour": "green"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDelete": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "cSpell.words": [
+      "Flexbox"
+    ],
+}
