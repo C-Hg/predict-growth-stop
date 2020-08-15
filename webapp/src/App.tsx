@@ -2,6 +2,8 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import Title from "./components/Title";
+import Container from "./components/common/Container.styled";
+import Form from "./components/form/Form";
 import theme from "./styles/theme";
 
 // TODO: a component for each type of cell (age, expected and actual weight)
@@ -14,9 +16,12 @@ import theme from "./styles/theme";
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Title />
-      {/* <Form /> collect data and display result*/}
-      {/* <About /> a few words about the study  */}
+      <Container>
+        <Title />
+        <Form />
+        {/* <Form /> collect data and display result*/}
+        {/* <About /> a few words about the study  */}
+      </Container>
     </ThemeProvider>
   );
 };

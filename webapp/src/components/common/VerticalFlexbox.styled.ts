@@ -1,17 +1,21 @@
-import styled from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 
 import Container from "./Container.styled";
 
-const VerticalFlexbox: React.FC = styled(Container)<{
-  alignItems: string;
-  justifyContent: string;
-  margin: string;
-  width: string;
-  height: string;
-  border: string;
-  borderRadius: string;
-  padding: string;
-}>`
+interface VerticalFlexboxProps {
+  readonly alignItems?: string;
+  readonly justifyContent?: string;
+  readonly margin?: string;
+  readonly width?: string;
+  readonly height?: string;
+  readonly border?: string;
+  readonly borderRadius?: string;
+  readonly padding?: string;
+}
+
+const VerticalFlexbox: React.FC<VerticalFlexboxProps> = styled(Container)<
+  VerticalFlexboxProps
+>`
   display: flex;
   flex-direction: column;
   align-items: ${(props) => props.alignItems || "center"};
