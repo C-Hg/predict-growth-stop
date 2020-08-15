@@ -2,20 +2,22 @@ import styled from "styled-components";
 
 import Container from "./Container.styled";
 
-const HorizontalFlexbox = styled(Container)<{
-  justifyContent: string;
-  width: string;
-  height: string;
-  border: string;
-  borderRadius: string;
-  padding: string;
-  margin: string;
-}>`
+interface Props {
+  readonly justifyContent?: string;
+  readonly margin?: string;
+  readonly width?: string;
+  readonly height?: string;
+  readonly border?: string;
+  readonly borderRadius?: string;
+  readonly padding?: string;
+}
+
+const HorizontalFlexbox = styled(Container)<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: ${(props) => props.justifyContent || "center"};
-  width: ${(props) => props.width || "100%"};
+  width: ${(props) => props.width || "auto"};
   height: ${(props) => props.height || "auto"};
   border: ${(props) => props.border || "0"};
   border-radius: ${(props) => props.borderRadius || "0"};

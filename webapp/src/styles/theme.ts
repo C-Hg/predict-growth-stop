@@ -5,11 +5,11 @@ const theme = {
     cursive: '"Handlee", cursive',
   },
   colors: {
-    black: "black",
+    black: "#151515",
     white: "white",
 
-    darkBlue: "#4086FF",
-    lightBlue: "rgba(0, 165, 255, 0.3)",
+    darkBlue: "#1D46D1",
+    lightBlue: "#30B8F8",
     twitterBlue: "#08a0e9",
 
     grey: "#818e96",

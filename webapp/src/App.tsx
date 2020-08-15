@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 
 import Title from "./components/Title";
 import Container from "./components/common/Container.styled";
-import Form from "./components/form/Form";
+import Form from "./form/Form";
 import theme from "./styles/theme";
 
 // TODO: a component for each type of cell (age, expected and actual weight)

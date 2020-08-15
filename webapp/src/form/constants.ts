@@ -1,0 +1,6 @@
+const GRID_BORDER_RADIUS = "12px";
+const GRID_HEIGHT = "202px";
+const DATA_WIDTH = "62px";
+const LEGEND_WIDTH = "140px";
+
+export { GRID_BORDER_RADIUS, GRID_HEIGHT, DATA_WIDTH, LEGEND_WIDTH };
