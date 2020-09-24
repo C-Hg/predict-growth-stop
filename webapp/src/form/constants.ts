@@ -1,5 +1,5 @@
 const GRID_BORDER_RADIUS = "12px";
-const GRID_HEIGHT = "202px";
+const GRID_HEIGHT = "142px";
 const DATA_WIDTH = "62px";
 const LEGEND_WIDTH = "140px";
 

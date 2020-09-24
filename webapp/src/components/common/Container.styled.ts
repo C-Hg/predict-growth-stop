@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-const Container: React.FC = styled.div<{
+interface Props {
+  readonly justifyContent?: string;
+  readonly margin?: string;
+  readonly width?: string;
+  readonly height?: string;
+  readonly padding?: string;
+}
+
+const Container: React.FC<Props> = styled.div<{
   width: string;
   height: string;
   margin: string;

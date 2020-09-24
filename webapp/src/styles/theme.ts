@@ -8,6 +8,13 @@ const theme = {
     black: "#151515",
     white: "white",
 
+    chartBlue: "#5995E3",
+    chartGreen: "#5DE686",
+    chartOrange: "#E3A736",
+    chartPurple: "#B373E6",
+    chartRed: "#E32D2B",
+    chartYellow: "#D6E342",
+
     darkBlue: "#1D46D1",
     lightBlue: "#30B8F8",
     twitterBlue: "#08a0e9",

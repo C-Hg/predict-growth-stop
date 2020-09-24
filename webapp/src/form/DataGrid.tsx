@@ -1,34 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Data } from "./Data.interface";
 import DataColumn from "./DataColumn";
 
-const defaultData: Data = {
-  age: "",
-  expectedWeight: "",
-  measuredWeight: "",
-};
+interface Props {
+  data: Data[];
+  updateData: (columnData: Data, index: number) => void;
+}
 
-const DataGrid: React.FC = () => {
-  const initialData: Data[] = [
-    defaultData,
-    defaultData,
-    defaultData,
-    defaultData,
-    defaultData,
-  ];
-  const [data, setData] = useState<Data[]>(initialData);
-
-  const addColumn = () => {
-    const newData: Data[] = [...data, defaultData];
-    setData(newData);
-  };
-
-  const updateData = (columnData: Data, index: number) => {
-    const newData = [...data];
-    newData[index] = columnData;
-    setData(newData);
-  };
+const DataGrid: React.FC<Props> = (props: Props) => {
+  const { data, updateData } = props;
 
   const columns = data.map((columnData, index) => (
     <DataColumn

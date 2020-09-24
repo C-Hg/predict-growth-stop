@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { GRID_BORDER_RADIUS, DATA_WIDTH } from "./constants";
+import { GRID_BORDER_RADIUS } from "./constants";
 
 interface Props {
   readonly bottomLeft?: boolean;

@@ -16,32 +16,24 @@ const DataColumn: React.FC<Props> = (props: Props) => {
   const { columnData, index, updateData } = props;
   const { age, expectedWeight, measuredWeight } = columnData;
 
-  const updateCellData = (dataName: DataNames, value: string) => {
+  const updateCell = (dataName: DataNames, value: string) => {
     //formatting logic
     const newColumnData = { ...columnData };
     newColumnData[dataName] = value;
     updateData(newColumnData, index);
   };
 
+  const updateAge = (value: string) => updateCell(DataNames.age, value);
+  const updateExpectedWeight = (value: string) =>
+    updateCell(DataNames.expectedWeight, value);
+  const updateMeasuredWeight = (value: string) =>
+    updateCell(DataNames.measuredWeight, value);
+
   return (
     <VerticalFlexbox width={DATA_WIDTH} height={GRID_HEIGHT} margin="0">
-      <DataCell
-        top
-        centered
-        value={age}
-        dataName={DataNames.age}
-        updateCellData={updateCellData}
-      />
-      <DataCell
-        value={expectedWeight}
-        dataName={DataNames.expectedWeight}
-        updateCellData={updateCellData}
-      />
-      <DataCell
-        value={measuredWeight}
-        dataName={DataNames.measuredWeight}
-        updateCellData={updateCellData}
-      />
+      <DataCell top centered value={age} updateCell={updateAge} />
+      <DataCell value={expectedWeight} updateCell={updateExpectedWeight} />
+      <DataCell value={measuredWeight} updateCell={updateMeasuredWeight} />
     </VerticalFlexbox>
   );
 };
