@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Data } from "./Data.interface";
+import { Column } from "./Data.interface";
 import DataGrid from "./DataGrid";
 import Legend from "./Legend";
 import { GRID_HEIGHT } from "./constants";
@@ -9,47 +9,48 @@ import Chart from "../chart/Chart";
 import Container from "../components/common/Container.styled";
 import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
 
-const defaultData: Data = {
+const defaultData: Column = {
   age: "",
   expectedWeight: "",
+  isValidated: false,
   measuredWeight: "",
 };
 
-interface Period {
-  from: number;
-  to: number;
-}
+// interface Period {
+//   from: number;
+//   to: number;
+// }
 
 const Form: React.FC = () => {
-  const initialData: Data[] = [
+  const initialData: Column[] = [
     defaultData,
     defaultData,
     defaultData,
     defaultData,
     defaultData,
   ];
-  const [data, setData] = useState<Data[]>(initialData);
-  const [period, setPeriod] = useState<Period>({ from: 0, to: 0 });
+  const [columns, setColumns] = useState<Column[]>(initialData);
+  // const [period, setPeriod] = useState<Period>({ from: 0, to: 0 });
 
   // const addColumn = () => {
   //   const newData: Data[] = [...data, defaultData];
   //   setData(newData);
   // };
 
-  const updateData = (columnData: Data, index: number) => {
-    const newData = [...data];
+  const updateColumn = (columnData: Column, index: number) => {
+    const newData = [...columns];
     newData[index] = columnData;
-    setData(newData);
+    setColumns(newData);
   };
 
   return (
     <>
       <Container width="50%">
-        <Chart data={data} />
+        <Chart columns={columns} />
       </Container>
       <HorizontalFlexbox height={GRID_HEIGHT}>
         <Legend />
-        <DataGrid data={data} updateData={updateData} />
+        <DataGrid data={columns} updateColumn={updateColumn} />
       </HorizontalFlexbox>
     </>
   );

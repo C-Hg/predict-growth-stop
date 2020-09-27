@@ -1,30 +1,31 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import * as chartjs from "chart.js";
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { ChartData, Line } from "react-chartjs-2";
 
-import { Data } from "../form/Data.interface";
+import filterColumns from "./filterColumns";
+
+import { Column } from "../form/Data.interface";
 import theme from "../styles/theme";
 
 interface Props {
-  data: Data[];
+  columns: Column[];
 }
 
 const { chartBlue, chartPurple, chartYellow } = theme.colors;
 
 const Chart: React.FC<Props> = (props: Props) => {
-  const { data } = props;
+  const { columns } = props;
 
-  const ages = data
-    .map((dataPoint) => Number(dataPoint.age))
-    .filter((age) => age !== 0);
-  const expectedWeight = data.map((dataPoint) => dataPoint.expectedWeight);
-  const measuredWeight = data.map((dataPoint) => dataPoint.measuredWeight);
+  // only keep the valid and completed columns
+  const { ages, expectedWeights, measuredWeights } = filterColumns(columns);
 
-  const formattedData: any = {
+  const formattedData: ChartData<chartjs.ChartData> = {
     labels: ages,
     datasets: [
       {
         // y coordinates
-        data: expectedWeight,
+        data: expectedWeights,
         label: "Poids attendu",
 
         backgroundColor: chartBlue,
@@ -32,6 +33,7 @@ const Chart: React.FC<Props> = (props: Props) => {
         fill: +1,
 
         borderWidth: 3,
+        // @ts-ignore
         fillColor: chartYellow,
         strokeColor: chartYellow,
 
@@ -48,9 +50,10 @@ const Chart: React.FC<Props> = (props: Props) => {
       },
       {
         // y coordinates
-        data: measuredWeight,
+        data: measuredWeights,
         label: "Poids mesuré",
 
+        // @ts-ignore
         fillColor: "white",
         fill: +2,
 

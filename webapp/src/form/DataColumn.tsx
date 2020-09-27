@@ -1,26 +1,34 @@
 import React from "react";
 
-import { Data, DataNames } from "./Data.interface";
+import { Column, DataNames } from "./Data.interface";
 import DataCell from "./DataCell";
 import { DATA_WIDTH, GRID_HEIGHT } from "./constants";
+import validateColumn from "./useValidateColumn";
 
 import VerticalFlexbox from "../components/common/VerticalFlexbox.styled";
 
 interface Props {
-  columnData: Data;
-  index: number;
-  updateData: (columnData: Data, index: number) => void;
+  columnData: Column;
+  updateColumn: (columnData: Column) => void;
 }
 
 const DataColumn: React.FC<Props> = (props: Props) => {
-  const { columnData, index, updateData } = props;
+  const { columnData, updateColumn } = props;
   const { age, expectedWeight, measuredWeight } = columnData;
+
+  // update the validation status of the column if necessary
+  const isColumnValid = validateColumn(columnData);
+  if (isColumnValid !== columnData.isValidated) {
+    const updatedColumn = { ...columnData };
+    updatedColumn.isValidated = isColumnValid;
+    updateColumn(updatedColumn);
+  }
 
   const updateCell = (dataName: DataNames, value: string) => {
     //formatting logic
     const newColumnData = { ...columnData };
     newColumnData[dataName] = value;
-    updateData(newColumnData, index);
+    updateColumn(newColumnData);
   };
 
   const updateAge = (value: string) => updateCell(DataNames.age, value);

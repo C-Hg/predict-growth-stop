@@ -1,24 +1,28 @@
 import React from "react";
 
-import { Data } from "./Data.interface";
+import { Column } from "./Data.interface";
 import DataColumn from "./DataColumn";
 
 interface Props {
-  data: Data[];
-  updateData: (columnData: Data, index: number) => void;
+  data: Column[];
+  updateColumn: (columnData: Column, index: number) => void;
 }
 
 const DataGrid: React.FC<Props> = (props: Props) => {
-  const { data, updateData } = props;
+  const { data, updateColumn } = props;
 
-  const columns = data.map((columnData, index) => (
-    <DataColumn
-      columnData={columnData}
-      index={index}
-      updateData={updateData}
-      key={index}
-    />
-  ));
+  const columns = data.map((columnData, index) => {
+    const indexedUpdateColumn = (columnData: Column) =>
+      updateColumn(columnData, index);
+
+    return (
+      <DataColumn
+        columnData={columnData}
+        updateColumn={indexedUpdateColumn}
+        key={index}
+      />
+    );
+  });
 
   return <>{columns}</>;
 };

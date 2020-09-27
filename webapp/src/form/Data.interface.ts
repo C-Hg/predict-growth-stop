@@ -1,7 +1,8 @@
-export interface Data {
+export interface Column {
   age: string;
   expectedWeight: string;
   measuredWeight: string;
+  isValidated: boolean;
 }
 
 export enum DataNames {
