@@ -3,7 +3,7 @@ import React from "react";
 import { Column, DataNames } from "./Data.interface";
 import DataCell from "./DataCell";
 import { DATA_WIDTH, GRID_HEIGHT } from "./constants";
-import validateColumn from "./useValidateColumn";
+import validateColumn from "./validateColumn";
 
 import VerticalFlexbox from "../components/common/VerticalFlexbox.styled";
 
