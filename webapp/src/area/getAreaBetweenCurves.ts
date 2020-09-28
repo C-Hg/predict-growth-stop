@@ -1,25 +1,25 @@
-import { Period } from "./Area.interface";
+import { Interval, Period } from "./Area.interface";
+import integrate from "./integrate";
 
 import { Column } from "../form/Data.interface";
 
-export interface Interval {
-  coefficient: number;
-  xEnd: number;
-  xStart: number;
-  yStart: number;
+interface BothIntervals {
+  expectedWeightInterval: Interval;
+  measuredWeightInterval: Interval;
 }
 
 const getAreaBetweenCurves = (columns: Column[], period: Period): string => {
-  const yValues = columns.map(
-    (column) => Number(column.expectedWeight) - Number(column.measuredWeight)
-  );
   // prendre en compte l'intervalle étudié +++
-  const intervals: Interval[] = [];
+  const intervals: BothIntervals[] = [];
 
   // select the intervals on which to run the integration
   for (let i = 0; i < columns.length - 1; i += 1) {
     const xStartFromColumn = Number(columns[i].age);
     const xEndFromColumn = Number(columns[i + 1].age);
+    const yEndFromColumnExpected = Number(columns[i + 1].expectedWeight);
+    const yEndFromColumnMeasured = Number(columns[i + 1].measuredWeight);
+    const yStartFromColumnExpected = Number(columns[i].expectedWeight);
+    const yStartFromColumnMeasured = Number(columns[i].measuredWeight);
 
     // skip this interval if we do not want to integrate it
     if (
@@ -29,7 +29,21 @@ const getAreaBetweenCurves = (columns: Column[], period: Period): string => {
       continue;
     }
 
-    // otherwise select xStart and xEnd
+    // compute the slopes
+    const expectedWeightSlope =
+      (yEndFromColumnExpected - yStartFromColumnExpected) /
+      (xEndFromColumn - xStartFromColumn);
+    const measuredWeightSlope =
+      (yEndFromColumnMeasured - yStartFromColumnMeasured) /
+      (xEndFromColumn - xStartFromColumn);
+
+    // then the intercepts with the starting points
+    const expectedWeightIntercept =
+      yStartFromColumnExpected - expectedWeightSlope * xStartFromColumn;
+    const measuredWeightIntercept =
+      yStartFromColumnMeasured - measuredWeightSlope * xStartFromColumn;
+
+    // select xStart and xEnd
     let xStart;
     if (Number(period.from) <= xStartFromColumn) {
       xStart = xStartFromColumn;
@@ -44,39 +58,28 @@ const getAreaBetweenCurves = (columns: Column[], period: Period): string => {
       xEnd = Number(period.to);
     }
 
-    // then compute the coefficient
-    const coefficient = (yValues[i + 1] - yValues[i]) / (xEnd - xStart);
-
     intervals.push({
-      coefficient,
-      xEnd,
-      xStart,
-      yStart: yValues[i],
+      expectedWeightInterval: {
+        slope: expectedWeightSlope,
+        xEnd,
+        xStart,
+        intercept: expectedWeightIntercept,
+      },
+      measuredWeightInterval: {
+        slope: measuredWeightSlope,
+        xEnd,
+        xStart,
+        intercept: measuredWeightIntercept,
+      },
     });
   }
 
-  // TODO: move me in my own file ++++
-
-  const integrate = (interval: Interval) => {
-    const { coefficient, xStart, xEnd, yStart } = interval;
-    // we integrate basic y = ax+b for each interval
-    const f = (x: number) => {
-      return coefficient * x + yStart;
-    };
-
-    let total = 0;
-    const step = 0.01;
-    for (let x = xStart; x < xEnd; x += step) {
-      total += f(x + step / 2) * step;
-    }
-    return total;
-  };
-
-  console.info(JSON.stringify(intervals));
-  // TODO: soustraire intégrale de poids mesuré à l'intégrale de poids attendu
   // perform integration on all intervals successively
   const result = intervals.reduce((area, interval) => {
-    return area + integrate(interval);
+    const intervalArea =
+      integrate(interval.expectedWeightInterval) -
+      integrate(interval.measuredWeightInterval);
+    return area + intervalArea;
   }, 0);
 
   return result.toFixed(3);

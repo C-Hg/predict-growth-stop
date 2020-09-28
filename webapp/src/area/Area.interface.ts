@@ -1,3 +1,10 @@
+export interface Interval {
+  slope: number;
+  xEnd: number; // from the interval
+  xStart: number; // from the interval
+  intercept: number;
+}
+
 export interface Period {
   from: string;
   isPeriodValid: boolean;
