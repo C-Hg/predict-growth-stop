@@ -8,16 +8,20 @@ const theme = {
     black: "#151515",
     white: "white",
 
-    chartBlue: "#5995E3",
+    beige: "#FEFCFA",
+    lightBlue: "#8FE5FF",
+    darkBlue: "#1C728C",
+    lightBrown: "#FFBF8F",
+    darkBrown: "#CC6E27",
+    orange: "#FF964F",
+    yellow: "#FFE5A6",
+
+    chartBlue: "#3671FF",
     chartGreen: "#5DE686",
     chartOrange: "#E3A736",
     chartPurple: "#B373E6",
-    chartRed: "#E32D2B",
+    chartRed: "#FF4A42",
     chartYellow: "#D6E342",
-
-    darkBlue: "#1D46D1",
-    lightBlue: "#30B8F8",
-    twitterBlue: "#08a0e9",
 
     grey: "#818e96",
     darkGrey: "#404040", // main text color
@@ -40,7 +44,7 @@ const theme = {
     sand: "#FFFCF5",
   },
   backgroundColors: {
-    main: "white",
+    main: "#FCF7F2",
   },
 };
 

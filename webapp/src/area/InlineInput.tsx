@@ -42,7 +42,7 @@ const StyledInput = styled.input<StyledInputProps>`
   border-bottom-width: 2px;
   border-bottom-color: ${(props) => {
     if (props.status === PeriodStatus.Default) {
-      return props.theme.colors.lightBlue;
+      return props.theme.colors.chartBlue;
     }
     if (props.status === PeriodStatus.Valid) {
       return props.theme.colors.green;

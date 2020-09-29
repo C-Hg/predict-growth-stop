@@ -16,3 +16,10 @@ export enum PeriodStatus {
   Valid,
   Wrong,
 }
+
+export interface StudiedIntervals {
+  intervalYEndExpected: number;
+  intervalYStartExpected: number;
+  intervalYEndMeasured: number;
+  intervalYStartMeasured: number;
+}

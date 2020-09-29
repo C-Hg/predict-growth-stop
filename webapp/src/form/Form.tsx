@@ -8,6 +8,7 @@ import { GRID_HEIGHT } from "./constants";
 import Area from "../area/Area";
 import { Period } from "../area/Area.interface";
 import Result from "../area/Result";
+import useAreaBetweenCurves from "../area/useAreaBetweenCurves";
 import Chart from "../chart/Chart";
 import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
 import VerticalFlexbox from "../components/common/VerticalFlexbox.styled";
@@ -33,6 +34,7 @@ const Form: React.FC = () => {
   const [to, setTo] = useState<string>("");
 
   const period: Period = { from, isPeriodValid, to };
+  const { area, studiedIntervals } = useAreaBetweenCurves(columns, period);
 
   // const addColumn = () => {
   //   const newData: Data[] = [...data, defaultData];
@@ -50,8 +52,12 @@ const Form: React.FC = () => {
   return (
     <>
       <VerticalFlexbox width="50%" margin="20px auto 20px auto">
-        <Chart columns={columns} />
-        <Result columns={columns} period={period} />
+        <Chart
+          columns={columns}
+          studiedIntervals={studiedIntervals}
+          period={period}
+        />
+        <Result area={area} period={period} />
       </VerticalFlexbox>
       <HorizontalFlexbox height={GRID_HEIGHT}>
         <Legend />

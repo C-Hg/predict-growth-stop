@@ -1,14 +1,12 @@
 import React from "react";
 
 import { Period } from "./Area.interface";
-import getAreaBetweenCurves from "./getAreaBetweenCurves";
 
 import H3 from "../components/common/H3.styled";
 import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
-import { Column } from "../form/Data.interface";
 
 interface Props {
-  columns: Column[];
+  area: string;
   period: Period;
 }
 
@@ -20,11 +18,12 @@ const resultText2 = " ans est égal à ";
 const resultText3 = " kg/an.";
 
 const Result: React.FC<Props> = (props: Props) => {
-  const { columns, period } = props;
+  const { area, period } = props;
+
   if (!period.isPeriodValid) {
     return <H3>{invalidDataText}</H3>;
   }
-  const result = getAreaBetweenCurves(columns, period);
+
   return (
     <HorizontalFlexbox>
       <H3>{resultText0}</H3>
@@ -37,7 +36,7 @@ const Result: React.FC<Props> = (props: Props) => {
       </H3>
       <H3>{resultText2}</H3>
       <H3 bold margin="0 10px 0 10px">
-        {result.replace(".", ",")}
+        {area.replace(".", ",")}
       </H3>
       <H3>{resultText3}</H3>
     </HorizontalFlexbox>

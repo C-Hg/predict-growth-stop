@@ -1,80 +1,229 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as chartjs from "chart.js";
+import cloneDeep from "lodash.clonedeep";
 import React from "react";
 import { ChartData, Line } from "react-chartjs-2";
 
 import filterColumns from "./filterColumns";
+import getStudiedData, { PlotData } from "./getStudiedData";
 
+import { Period, StudiedIntervals } from "../area/Area.interface";
 import { Column } from "../form/Data.interface";
 import theme from "../styles/theme";
 
 interface Props {
   columns: Column[];
+  studiedIntervals: StudiedIntervals;
+  period: Period;
 }
 
-const { chartBlue, chartPurple, chartYellow } = theme.colors;
+const { beige, orange, yellow, chartRed, chartBlue } = theme.colors;
 
-const Chart: React.FC<Props> = (props: Props) => {
-  const { columns } = props;
+const Charts: React.FC<Props> = (props: Props) => {
+  const { columns, studiedIntervals, period } = props;
 
   // only keep the valid and completed columns
   const { ages, expectedWeights, measuredWeights } = filterColumns(columns);
 
-  const formattedData: ChartData<chartjs.ChartData> = {
-    labels: ages,
-    datasets: [
-      {
-        // y coordinates
-        data: expectedWeights,
-        label: "Poids attendu",
+  let definitiveExpectedWeights = cloneDeep(expectedWeights);
+  let definitiveMeasuredWeights = cloneDeep(measuredWeights);
 
-        backgroundColor: chartBlue,
-        // fill zIndex
-        fill: +1,
+  let studiedDatasetExpected: PlotData[] = [];
+  let studiedDatasetMeasured: PlotData[] = [];
+  if (period.isPeriodValid) {
+    const studiedData = getStudiedData(
+      ages,
+      expectedWeights,
+      measuredWeights,
+      period,
+      studiedIntervals
+    );
+    const {
+      studiedDataExpected,
+      studiedDataMeasured,
+      updatedExpectedWeights,
+      updatedMeasuredWeights,
+    } = studiedData;
+    studiedDatasetExpected = studiedDataExpected;
+    studiedDatasetMeasured = studiedDataMeasured;
+    definitiveExpectedWeights = cloneDeep(updatedExpectedWeights);
+    definitiveMeasuredWeights = cloneDeep(updatedMeasuredWeights);
+  }
 
-        borderWidth: 3,
-        // @ts-ignore
-        fillColor: chartYellow,
-        strokeColor: chartYellow,
+  const expectedWeightsData = definitiveExpectedWeights.map((weight, index) => {
+    return { x: ages[index], y: weight };
+  });
 
-        pointBackgroundColor: chartYellow,
-        pointBorderColor: chartYellow,
-        pointBorderWidth: 5,
-        pointColor: chartYellow,
-        pointStrokeColor: chartYellow,
+  const measuredWeightsData = definitiveMeasuredWeights.map((weight, index) => {
+    return { x: ages[index], y: weight };
+  });
 
-        pointHitRadius: 10,
+  const baseDatasets = [
+    {
+      // y coordinates
+      data: studiedDatasetExpected,
+      label: "Intervalle étudié haut",
+      backgroundColor: orange, // legend
 
-        // straight line
-        lineTension: 0,
-      },
-      {
-        // y coordinates
-        data: measuredWeights,
-        label: "Poids mesuré",
+      fill: +1,
 
-        // @ts-ignore
-        fillColor: "white",
-        fill: +2,
+      borderColor: "black",
+      borderWidth: 2,
 
-        backgroundColor: chartPurple,
-        strokeColor: chartPurple,
-        borderWidth: 3,
+      pointBackgroundColor: orange,
+      pointBorderColor: "black",
+      pointBorderWidth: 2,
+      pointRadius: 4,
 
-        pointBackgroundColor: chartPurple,
-        pointBorderColor: chartPurple,
-        pointColor: chartPurple,
-        pointStrokeColor: chartPurple,
-        pointBorderWidth: 5,
+      pointHitRadius: 10,
 
-        pointHitRadius: 10,
+      // straight line
+      lineTension: 0,
 
-        lineTension: 0,
-      },
-    ],
+      // axis references
+      xAxisID: "x-axis",
+      yAxisID: "y-axis",
+
+      order: 0,
+    },
+    {
+      // y coordinates
+      data: studiedDatasetMeasured,
+      label: "Intervalle étudié bas",
+      backgroundColor: beige, // legend
+
+      fill: false,
+
+      borderColor: "black",
+      borderWidth: 2,
+
+      pointBackgroundColor: orange,
+      pointBorderColor: "black",
+      pointBorderWidth: 2,
+      pointRadius: 4,
+
+      pointHitRadius: 10,
+
+      // straight line
+      lineTension: 0,
+
+      // axis references
+      xAxisID: "x-axis",
+      yAxisID: "y-axis",
+
+      order: 1,
+    },
+    {
+      // y coordinates
+      data: expectedWeightsData,
+      label: "Poids attendu",
+      backgroundColor: yellow, // legend
+
+      fill: 3,
+
+      borderColor: "black",
+      borderWidth: 2,
+
+      pointBackgroundColor: chartBlue,
+      pointBorderColor: "black",
+      pointBorderWidth: 2,
+      pointRadius: 4,
+
+      pointHitRadius: 10,
+
+      // straight line
+      lineTension: 0,
+
+      // axis references
+      xAxisID: "x-axis",
+      yAxisID: "y-axis",
+
+      order: 2,
+    },
+    {
+      // y coordinates
+      data: measuredWeightsData,
+      label: "Poids mesuré",
+
+      fill: false,
+
+      backgroundColor: chartRed,
+      borderColor: "black",
+      borderWidth: 2,
+
+      pointBackgroundColor: chartRed,
+      pointBorderColor: "black",
+      pointBorderWidth: 2,
+      pointRadius: 4,
+
+      pointHitRadius: 10,
+
+      lineTension: 0,
+
+      // axis references
+      xAxisID: "x-axis",
+      yAxisID: "y-axis",
+
+      order: 3,
+    },
+  ];
+
+  const dataToRender: ChartData<chartjs.ChartData> = {
+    datasets: [...baseDatasets],
   };
 
-  return <Line data={formattedData} />;
+  return (
+    <Line
+      data={dataToRender}
+      options={{
+        legend: {
+          position: "top",
+          labels: {
+            fontSize: 14,
+            fontColor: theme.colors.darkGrey,
+            padding: 20,
+            usePointStyle: true,
+          },
+        },
+        tooltips: {
+          enabled: true,
+          mode: "x",
+        },
+        scales: {
+          yAxes: [
+            {
+              id: "y-axis",
+              // type: "linear",
+              scaleLabel: {
+                display: true,
+              },
+              ticks: {
+                // autoSkip: true,
+                // suggestedMin: 10,
+                // suggestedMax: 40,
+                // maxTicksLimit: 10,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              id: "x-axis",
+              type: "linear" /* <--- this */,
+              scaleLabel: {
+                display: true,
+              },
+              ticks: {
+                // autoSkip: true,
+                // suggestedMin: 5,
+                // suggestedMax: 15,
+                // maxTicksLimit: 10,
+              },
+            },
+          ],
+        },
+      }}
+    />
+  );
 };
 
-export default Chart;
+export default Charts;

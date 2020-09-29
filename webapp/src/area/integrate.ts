@@ -2,7 +2,7 @@ import { Interval } from "./Area.interface";
 
 const integrate = (interval: Interval): number => {
   const { intercept, slope, xStart, xEnd } = interval;
-  // we integrate basic affine functions for each interval
+  // we integrate affine functions for each interval
   function f(x: number) {
     return Number((slope * x + intercept).toFixed(4));
   }

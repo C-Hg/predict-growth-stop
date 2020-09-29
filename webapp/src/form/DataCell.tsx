@@ -67,10 +67,9 @@ const StyledInput = styled.input<StyledInputProps>`
   width: 60px;
   height: 100%;
   text-align: center;
-  outline: none;
   padding: 0px;
   :focus {
-    border-color: ${(props) => props.theme.colors.lightBlue};
+    border-color: ${(props) => props.theme.colors.chartOrange};
     z-index: 10;
   }
 `;
