@@ -7,7 +7,7 @@ const H2: React.FC = styled.p<{ theme: Theme }>`
   margin: 0;
   padding: 0;
   text-align: "center";
-  font-size: 22px;
+  font-size: 20px;
   background-color: "transparent";
 `;
 

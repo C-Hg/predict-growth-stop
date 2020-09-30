@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PeriodStatus } from "./Area.interface";
+import device from "../styles/medias";
 
 interface Props {
-  status: PeriodStatus;
+  isPeriodValid: boolean;
   value: string;
   updateValue: (value: string) => void;
 }
 
 const InlineInput: React.FC<Props> = (props: Props) => {
-  const { status, value, updateValue } = props;
+  const { isPeriodValid, value, updateValue } = props;
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { value: newValue } = event.currentTarget;
@@ -22,7 +22,7 @@ const InlineInput: React.FC<Props> = (props: Props) => {
 
   return (
     <StyledInput
-      status={status}
+      isPeriodValid={isPeriodValid}
       type="string"
       value={value.replace(".", ",")}
       onChange={handleChange}
@@ -31,7 +31,7 @@ const InlineInput: React.FC<Props> = (props: Props) => {
 };
 
 interface StyledInputProps {
-  readonly status: PeriodStatus;
+  readonly isPeriodValid: boolean;
 }
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -40,20 +40,12 @@ const StyledInput = styled.input<StyledInputProps>`
   border-style: solid;
   border-width: 0px;
   border-bottom-width: 2px;
-  border-bottom-color: ${(props) => {
-    if (props.status === PeriodStatus.Default) {
-      return props.theme.colors.chartBlue;
-    }
-    if (props.status === PeriodStatus.Valid) {
-      return props.theme.colors.green;
-    }
-    return props.theme.colors.red;
-  }};
+  border-bottom-color: ${(props) =>
+    props.isPeriodValid ? props.theme.colors.green : props.theme.colors.orange};
 
   color: ${(props) => props.theme.colors.darkGrey};
   font-family: ${(props) => props.theme.fonts.main};
   font-weight: 600;
-  font-size: 16px;
   justify-content: "flex-start";
 
   width: 50px;
@@ -61,6 +53,14 @@ const StyledInput = styled.input<StyledInputProps>`
   margin-left: 10px;
   text-align: center;
   padding: 0px;
+
+  ${device.mobile} {
+    font-size: 14px;
+  }
+
+  ${device.desktop} {
+    font-size: 16px;
+  }
 `;
 
 export default InlineInput;

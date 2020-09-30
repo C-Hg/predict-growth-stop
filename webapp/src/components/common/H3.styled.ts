@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import device from "../../styles/medias";
+
 interface Props {
   readonly bold?: boolean;
   readonly margin?: string;
@@ -12,8 +14,15 @@ const H3 = styled.p<Props>`
   margin: ${(props) => (props.margin ? props.margin : 0)};
   padding: 0;
   text-align: "center";
-  font-size: 18px;
   background-color: "transparent";
+
+  ${device.mobile} {
+    font-size: 14px;
+  }
+
+  ${device.desktop} {
+    font-size: 18px;
+  }
 `;
 
 export default H3;

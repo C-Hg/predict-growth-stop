@@ -2,6 +2,7 @@ import React from "react";
 
 import { Column } from "./Data.interface";
 import DataColumn from "./DataColumn";
+import DataColumnsContainer from "./styled/DataColumnsContainer.styled";
 
 interface Props {
   data: Column[];
@@ -24,7 +25,7 @@ const DataGrid: React.FC<Props> = (props: Props) => {
     );
   });
 
-  return <>{columns}</>;
+  return <DataColumnsContainer>{columns}</DataColumnsContainer>;
 };
 
 export default DataGrid;

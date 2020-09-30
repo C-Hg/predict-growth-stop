@@ -1,11 +1,18 @@
-const customMediaQuery = (maxWidth: number): string =>
-  `@media (max-width: ${maxWidth}px)`;
+const customMediaQuery = (width: number): string =>
+  `@media (min-width: ${width}px)`;
 
-const media = {
-  custom: customMediaQuery,
-  desktop: customMediaQuery(922),
-  tablet: customMediaQuery(768),
-  phone: customMediaQuery(576),
+const size = {
+  mobile: 300,
+  mobileL: 425,
+  tablet: 768,
+  desktop: 922,
 };
 
-export default media;
+export const device = {
+  mobile: customMediaQuery(size.mobile),
+  mobileL: customMediaQuery(size.mobileL),
+  tablet: customMediaQuery(size.tablet),
+  desktop: customMediaQuery(size.desktop),
+};
+
+export default device;

@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import Container from "./Container.styled";
-
 interface Props {
   readonly justifyContent?: string;
   readonly margin?: string;
@@ -10,19 +8,21 @@ interface Props {
   readonly border?: string;
   readonly borderRadius?: string;
   readonly padding?: string;
+  readonly overflow?: string;
 }
 
-const HorizontalFlexbox = styled(Container)<Props>`
+const HorizontalFlexbox = styled.div<Props>`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: ${(props) => props.justifyContent || "center"};
+  align-items: safe center;
+  justify-content: ${(props) => props.justifyContent || "safe center"};
   width: ${(props) => props.width || "auto"};
   height: ${(props) => props.height || "auto"};
   border: ${(props) => props.border || "0"};
   border-radius: ${(props) => props.borderRadius || "0"};
   padding: ${(props) => props.padding || "0"};
   margin: ${(props) => props.margin || "auto"};
+  overflow-x: ${(props) => props.overflow || ""};
   background-color: ${(props) => props.theme.backgroundColors.main};
 `;
 

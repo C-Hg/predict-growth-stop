@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { Column } from "./Data.interface";
 import DataGrid from "./DataGrid";
 import Legend from "./Legend";
-import { GRID_HEIGHT } from "./constants";
+import DataGridContainer from "./styled/DataGridContainer.styled";
+import validateColumn from "./validateColumn";
 
 import Area from "../area/Area";
-import { Period } from "../area/Area.interface";
+import { Period, PeriodStatus } from "../area/Area.interface";
 import Result from "../area/Result";
+import checkPeriodStatus from "../area/checkPeriodStatus";
 import useAreaBetweenCurves from "../area/useAreaBetweenCurves";
 import Chart from "../chart/Chart";
-import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
-import VerticalFlexbox from "../components/common/VerticalFlexbox.styled";
+import ChartContainer from "../chart/ChartContainer.styled";
 
 const defaultData: Column = {
   age: "",
@@ -41,35 +42,50 @@ const Form: React.FC = () => {
   //   setData(newData);
   // };
 
+  // TODO: validation définitive horizontale (les ages doivent être impérativement croissants)
+  const status = checkPeriodStatus(columns, from, to);
+  const updatedIsPeriodValid = status === PeriodStatus.Valid;
+  if (isPeriodValid !== updatedIsPeriodValid) {
+    setIsPeriodValid(updatedIsPeriodValid);
+  }
+
   const updateColumn = (columnData: Column, index: number) => {
     const newData = [...columns];
     newData[index] = columnData;
     setColumns(newData);
   };
 
+  // update the validation status of the column if necessary
+  columns.forEach((column, index) => {
+    const isColumnValid = validateColumn(column);
+    if (isColumnValid !== column.isValidated) {
+      const updatedColumn = { ...column };
+      updatedColumn.isValidated = isColumnValid;
+      updateColumn(updatedColumn, index);
+    }
+  });
+
   // TODO: validation horizontale complète: âges croissants et toutes colonnes valides
   // minimum 2 colonnes bien sûr
   return (
     <>
-      <VerticalFlexbox width="50%" margin="20px auto 20px auto">
+      <ChartContainer>
         <Chart
           columns={columns}
           studiedIntervals={studiedIntervals}
           period={period}
         />
         <Result area={area} period={period} />
-      </VerticalFlexbox>
-      <HorizontalFlexbox height={GRID_HEIGHT}>
+      </ChartContainer>
+      <DataGridContainer>
         <Legend />
         <DataGrid data={columns} updateColumn={updateColumn} />
-      </HorizontalFlexbox>
+      </DataGridContainer>
       <Area
-        columns={columns}
         from={from}
         isPeriodValid={isPeriodValid}
         setFrom={setFrom}
         setTo={setTo}
-        setIsPeriodValid={setIsPeriodValid}
         to={to}
       />
     </>

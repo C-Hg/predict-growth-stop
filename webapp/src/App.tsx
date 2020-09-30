@@ -1,8 +1,9 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 
+import AppContainer from "./AppContainer.styled";
+import ContentContainer from "./ContentContainer.styled";
 import Title from "./components/Title";
-import Container from "./components/common/Container.styled";
 import Form from "./form/Form";
 import theme from "./styles/theme";
 
@@ -16,12 +17,13 @@ import theme from "./styles/theme";
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        <Title />
-        <Form />
-        {/* <Form /> collect data and display result*/}
-        {/* <About /> a few words about the study  */}
-      </Container>
+      <AppContainer>
+        <ContentContainer>
+          <Title />
+          <Form />
+          {/* <About /> a few words about the study  */}
+        </ContentContainer>
+      </AppContainer>
     </ThemeProvider>
   );
 };

@@ -1,8 +1,7 @@
 const theme = {
   fonts: {
-    main: '"Open Sans", sans-serif',
-    secondary: '"Raleway", sans-serif',
-    cursive: '"Handlee", cursive',
+    main: '"Noto Sans", sans-serif;',
+    secondary: '"Open Sans", sans-serif',
   },
   colors: {
     black: "#151515",
@@ -44,6 +43,7 @@ const theme = {
     sand: "#FFFCF5",
   },
   backgroundColors: {
+    card: "white",
     main: "#FCF7F2",
   },
 };

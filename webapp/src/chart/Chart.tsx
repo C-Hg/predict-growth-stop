@@ -176,18 +176,22 @@ const Charts: React.FC<Props> = (props: Props) => {
     <Line
       data={dataToRender}
       options={{
+        // aspectRatio: 1,
+        maintainAspectRatio: true,
         legend: {
-          position: "top",
-          labels: {
-            fontSize: 14,
-            fontColor: theme.colors.darkGrey,
-            padding: 20,
-            usePointStyle: true,
-          },
+          display: false,
         },
         tooltips: {
           enabled: true,
           mode: "x",
+        },
+        layout: {
+          padding: {
+            left: -10,
+            right: 30,
+            top: 0,
+            bottom: 0,
+          },
         },
         scales: {
           yAxes: [
@@ -198,10 +202,10 @@ const Charts: React.FC<Props> = (props: Props) => {
                 display: true,
               },
               ticks: {
-                // autoSkip: true,
+                autoSkip: true,
                 // suggestedMin: 10,
                 // suggestedMax: 40,
-                // maxTicksLimit: 10,
+                maxTicksLimit: 6,
               },
             },
           ],
@@ -213,10 +217,10 @@ const Charts: React.FC<Props> = (props: Props) => {
                 display: true,
               },
               ticks: {
-                // autoSkip: true,
+                autoSkip: true,
                 // suggestedMin: 5,
                 // suggestedMax: 15,
-                // maxTicksLimit: 10,
+                maxTicksLimit: 10,
               },
             },
           ],

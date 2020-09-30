@@ -23,19 +23,19 @@ const Result: React.FC<Props> = (props: Props) => {
   if (!period.isPeriodValid) {
     return <H3>{invalidDataText}</H3>;
   }
-
+  // TODO: remplacer par des span +++ stylisés bold
   return (
     <HorizontalFlexbox>
       <H3>{resultText0}</H3>
-      <H3 bold margin="0 10px 0 10px">
+      <H3 bold margin="0 5px 0 5px">
         {period.from.replace(".", ",")}
       </H3>
       <H3>{resultText1}</H3>
-      <H3 bold margin="0 10px 0 10px">
+      <H3 bold margin="0 5px 0 5px">
         {period.to.replace(".", ",")}
       </H3>
       <H3>{resultText2}</H3>
-      <H3 bold margin="0 10px 0 10px">
+      <H3 bold margin="0 5px 0 5px">
         {area.replace(".", ",")}
       </H3>
       <H3>{resultText3}</H3>

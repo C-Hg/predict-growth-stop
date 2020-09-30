@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { GRID_BORDER_RADIUS } from "./constants";
+import { GRID_BORDER_RADIUS, LEGEND_WIDTH_MOBILE } from "./constants";
+
+import device from "../styles/medias";
 
 interface Props {
   value: string;
@@ -43,34 +45,37 @@ interface StyledInputProps {
 }
 
 const StyledInput = styled.input<StyledInputProps>`
-  align-items: center;
   background-color: ${(props) => props.theme.backgroundColors.main};
-  border-bottom-left-radius: ${(props) =>
-    props.bottomLeft ? GRID_BORDER_RADIUS : "0px"};
-  border-bottom-right-radius: ${(props) =>
-    props.bottomRight ? GRID_BORDER_RADIUS : "0px"};
+
   border-color: ${(props) => props.theme.colors.githubGrey};
   border-style: solid;
   border-width: 2px;
 
-  border-top-left-radius: ${(props) =>
-    props.topLeft ? GRID_BORDER_RADIUS : "0px"};
-  border-top-right-radius: ${(props) =>
-    props.topRight ? GRID_BORDER_RADIUS : "0px"};
   color: ${(props) => props.theme.colors.darkGrey};
   font-family: ${(props) => props.theme.fonts.main};
-  font-size: 18px;
-  justify-content: ${(props) => (props.centered ? "center" : "flex-start")};
 
-  margin: 0px;
+  margin: 0;
   margin-top: ${(props) => (props.top ? "0px" : "-2px")};
-  width: 60px;
   height: 100%;
   text-align: center;
-  padding: 0px;
+  padding: 0;
   :focus {
     border-color: ${(props) => props.theme.colors.chartOrange};
     z-index: 10;
+  }
+
+  ${device.mobile} {
+    font-size: 14px;
+
+    width: ${LEGEND_WIDTH_MOBILE};
+  }
+
+  ${device.mobileL} {
+    width: 60px;
+  }
+
+  ${device.desktop} {
+    font-size: 16px;
   }
 `;
 
