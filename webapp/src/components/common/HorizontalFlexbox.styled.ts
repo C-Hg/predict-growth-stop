@@ -23,7 +23,7 @@ const HorizontalFlexbox = styled.div<Props>`
   padding: ${(props) => props.padding || "0"};
   margin: ${(props) => props.margin || "auto"};
   overflow-x: ${(props) => props.overflow || ""};
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: transparent;
 `;
 
 export default HorizontalFlexbox;

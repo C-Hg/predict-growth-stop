@@ -8,11 +8,12 @@ import validateColumn from "./validateColumn";
 
 import Area from "../area/Area";
 import { Period, PeriodStatus } from "../area/Area.interface";
+import DataCard from "../area/DataCard.styled";
 import Result from "../area/Result";
 import checkPeriodStatus from "../area/checkPeriodStatus";
 import useAreaBetweenCurves from "../area/useAreaBetweenCurves";
 import Chart from "../chart/Chart";
-import ChartContainer from "../chart/ChartContainer.styled";
+import ChartCard from "../chart/ChartCard.styled";
 
 const defaultData: Column = {
   age: "",
@@ -69,25 +70,27 @@ const Form: React.FC = () => {
   // minimum 2 colonnes bien sûr
   return (
     <>
-      <ChartContainer>
+      <ChartCard>
         <Chart
           columns={columns}
           studiedIntervals={studiedIntervals}
           period={period}
         />
         <Result area={area} period={period} />
-      </ChartContainer>
-      <DataGridContainer>
-        <Legend />
-        <DataGrid data={columns} updateColumn={updateColumn} />
-      </DataGridContainer>
-      <Area
-        from={from}
-        isPeriodValid={isPeriodValid}
-        setFrom={setFrom}
-        setTo={setTo}
-        to={to}
-      />
+      </ChartCard>
+      <DataCard>
+        <DataGridContainer>
+          <Legend />
+          <DataGrid data={columns} updateColumn={updateColumn} />
+        </DataGridContainer>
+        <Area
+          from={from}
+          isPeriodValid={isPeriodValid}
+          setFrom={setFrom}
+          setTo={setTo}
+          to={to}
+        />
+      </DataCard>
     </>
   );
 };

@@ -17,7 +17,7 @@ interface Props {
 }
 
 const StyledCell: React.FC<Props> = styled.div<Props>`
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: ${(props) => props.theme.backgroundColors.card};
 
   border-color: ${(props) => props.theme.colors.githubGrey};
   border-style: solid;

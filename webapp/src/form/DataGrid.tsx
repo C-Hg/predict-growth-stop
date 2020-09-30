@@ -15,12 +15,14 @@ const DataGrid: React.FC<Props> = (props: Props) => {
   const columns = data.map((columnData, index) => {
     const indexedUpdateColumn = (columnData: Column) =>
       updateColumn(columnData, index);
+    const isLast = index === data.length - 1;
 
     return (
       <DataColumn
         columnData={columnData}
-        updateColumn={indexedUpdateColumn}
         key={index}
+        last={isLast}
+        updateColumn={indexedUpdateColumn}
       />
     );
   });

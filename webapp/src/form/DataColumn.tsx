@@ -6,11 +6,12 @@ import DataColumnContainer from "./styled/DataColumnContainer.styled";
 
 interface Props {
   columnData: Column;
+  last: boolean;
   updateColumn: (columnData: Column) => void;
 }
 
 const DataColumn: React.FC<Props> = (props: Props) => {
-  const { columnData, updateColumn } = props;
+  const { columnData, last, updateColumn } = props;
   const { age, expectedWeight, measuredWeight } = columnData;
 
   const updateCell = (dataName: DataNames, value: string) => {
@@ -28,9 +29,18 @@ const DataColumn: React.FC<Props> = (props: Props) => {
 
   return (
     <DataColumnContainer>
-      <DataCell top centered value={age} updateCell={updateAge} />
-      <DataCell value={expectedWeight} updateCell={updateExpectedWeight} />
-      <DataCell value={measuredWeight} updateCell={updateMeasuredWeight} />
+      <DataCell last={last} top centered value={age} updateCell={updateAge} />
+      <DataCell
+        last={last}
+        value={expectedWeight}
+        updateCell={updateExpectedWeight}
+      />
+      <DataCell
+        bottom
+        last={last}
+        value={measuredWeight}
+        updateCell={updateMeasuredWeight}
+      />
     </DataColumnContainer>
   );
 };

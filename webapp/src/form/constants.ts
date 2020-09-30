@@ -1,4 +1,4 @@
-const GRID_BORDER_RADIUS = "12px";
+const GRID_BORDER_RADIUS = "6px";
 const GRID_HEIGHT = "120px";
 const GRID_HEIGHT_MOBILE = "40px";
 const DATA_WIDTH = "62px";

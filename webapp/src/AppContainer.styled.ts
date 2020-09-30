@@ -4,7 +4,7 @@ const AppContainer: React.FC = styled.div`
   position: absolute;
   font-family: ${(props) => props.theme.fonts.main};
   color: ${(props) => props.theme.colors.darkGrey};
-  background-color: ${(props) => props.theme.colors.yellow};
+  background-color: ${(props) => props.theme.backgroundColors.main};
   top: 0;
   bottom: 0;
   left: 0;

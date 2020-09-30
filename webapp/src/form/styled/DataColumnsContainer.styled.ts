@@ -8,7 +8,7 @@ const DataColumnsContainer: React.FC = styled.div`
   justify-content: flex-start;
   margin: auto;
 
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: transparent;
 
   ${device.mobile} {
     flex-direction: column;

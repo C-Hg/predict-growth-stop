@@ -9,7 +9,7 @@ const LegendContainer: React.FC = styled.div`
   justify-content: safe center;
 
   margin: auto;
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: ${(props) => props.theme.backgroundColors.card};
 
   ${device.mobile} {
     height: ${GRID_HEIGHT_MOBILE};

@@ -1,9 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 
+import AreaContainer from "./AreaContainer";
 import InlineInput from "./InlineInput";
 
-import H3 from "../components/common/H3.styled";
-import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
+import device from "../styles/medias";
 
 interface Props {
   from: string;
@@ -13,30 +14,49 @@ interface Props {
   to: string;
 }
 
-const areaLegend = "Calculer l'aire entre les courbes de ";
-const areaLegendJunction = " ans à ";
+const areaLegend = "Calculer l'aire sous la courbe entre";
+const areaLegendJunction = " et ";
 const areaLegendEnd = " ans.";
 
 const Area: React.FC<Props> = (props: Props) => {
   const { from, isPeriodValid, setFrom, setTo, to } = props;
 
   return (
-    <HorizontalFlexbox margin="20px 0 0 0">
-      <H3>{areaLegend}</H3>
-      <InlineInput
-        isPeriodValid={isPeriodValid}
-        value={from}
-        updateValue={setFrom}
-      />
-      <H3>{areaLegendJunction}</H3>
-      <InlineInput
-        isPeriodValid={isPeriodValid}
-        value={to}
-        updateValue={setTo}
-      />
-      <H3>{areaLegendEnd}</H3>
-    </HorizontalFlexbox>
+    <AreaContainer>
+      <Text>{areaLegend}</Text>
+      <Text>
+        <InlineInput
+          isPeriodValid={isPeriodValid}
+          value={from}
+          updateValue={setFrom}
+        />
+        {areaLegendJunction}
+        <InlineInput
+          isPeriodValid={isPeriodValid}
+          value={to}
+          updateValue={setTo}
+        />
+        {areaLegendEnd}
+      </Text>
+    </AreaContainer>
   );
 };
+
+const Text: React.FC = styled.p`
+  color: ${(props) => props.theme.colors.darkGrey};
+  font-family: ${(props) => props.theme.fonts.main};
+  font-weight: 400;
+  text-align: "center";
+  background-color: "transparent";
+  margin: 0;
+
+  ${device.mobile} {
+    font-size: 14px;
+  }
+
+  ${device.desktop} {
+    font-size: 18px;
+  }
+`;
 
 export default Area;

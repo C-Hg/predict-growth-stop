@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { GRID_BORDER_RADIUS, LEGEND_WIDTH_MOBILE } from "./constants";
+import { DATA_WIDTH_MOBILE, GRID_HEIGHT_MOBILE } from "./constants";
 
 import device from "../styles/medias";
 
@@ -9,6 +9,9 @@ interface Props {
   value: string;
   updateCell: (value: string) => void;
   centered?: boolean;
+  last: boolean;
+  bottom?: boolean;
+
   top?: boolean;
 }
 
@@ -38,6 +41,9 @@ interface StyledInputProps {
   readonly bottomLeft?: boolean;
   readonly bottomRight?: boolean;
   readonly centered?: boolean;
+  readonly last?: boolean;
+
+  readonly bottom?: boolean;
   readonly top?: boolean;
   readonly topLeft?: boolean;
   readonly topRight?: boolean;
@@ -45,7 +51,7 @@ interface StyledInputProps {
 }
 
 const StyledInput = styled.input<StyledInputProps>`
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: ${(props) => props.theme.backgroundColors.card};
 
   border-color: ${(props) => props.theme.colors.githubGrey};
   border-style: solid;
@@ -55,8 +61,7 @@ const StyledInput = styled.input<StyledInputProps>`
   font-family: ${(props) => props.theme.fonts.main};
 
   margin: 0;
-  margin-top: ${(props) => (props.top ? "0px" : "-2px")};
-  height: 100%;
+
   text-align: center;
   padding: 0;
   :focus {
@@ -64,17 +69,29 @@ const StyledInput = styled.input<StyledInputProps>`
     z-index: 10;
   }
 
+  &:hover {
+    cursor: pointer;
+  }
+
   ${device.mobile} {
     font-size: 14px;
+    height: ${GRID_HEIGHT_MOBILE};
+    width: ${DATA_WIDTH_MOBILE};
 
-    width: ${LEGEND_WIDTH_MOBILE};
+    border-bottom-width: ${(props) => (props.last ? "2px" : "0px")};
+    border-right-width: ${(props) => (props.bottom ? "2px" : "0px")};
   }
 
   ${device.mobileL} {
+    height: 100%;
     width: 60px;
+
+    border-bottom-width: ${(props) => (props.bottom ? "2px" : "0px")};
+    border-right-width: 2px;
   }
 
   ${device.desktop} {
+    height: 100%;
     font-size: 16px;
   }
 `;

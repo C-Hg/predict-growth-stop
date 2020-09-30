@@ -6,14 +6,15 @@ const DataGridContainer = styled.div`
   display: flex;
   margin: auto;
   overflow-x: auto;
-  padding-right: 10px;
-  background-color: ${(props) => props.theme.backgroundColors.main};
+
+  background-color: transparent;
 
   ${device.mobile} {
     flex-direction: column;
   }
 
   ${device.mobileL} {
+    padding-right: 10px;
     flex-direction: row;
   }
 `;

@@ -1,0 +1,4 @@
+const CARD_WIDTH = "90%";
+const CARD_BORDER_RADIUS = "6px";
+
+export { CARD_WIDTH, CARD_BORDER_RADIUS };

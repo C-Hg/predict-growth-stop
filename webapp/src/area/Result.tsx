@@ -1,6 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 
 import { Period } from "./Area.interface";
+import ResultContainer from "./ResultContainer.styled";
 
 import H3 from "../components/common/H3.styled";
 import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
@@ -11,7 +13,9 @@ interface Props {
 }
 
 const invalidDataText =
-  "Renseignez les données ci-dessous pour évaluer le risque d'arrêt de croissance.";
+  "Insérez vos données ci-dessous pour évaluer le risque d'arrêt de croissance (maximum 12 points). " +
+  "Les âges doivent être en années et les poids en kg. " +
+  "Enfin, sélectionnez l'intervalle à étudier.";
 const resultText0 = "L'aire entre les courbes de ";
 const resultText1 = " ans à ";
 const resultText2 = " ans est égal à ";
@@ -21,26 +25,30 @@ const Result: React.FC<Props> = (props: Props) => {
   const { area, period } = props;
 
   if (!period.isPeriodValid) {
-    return <H3>{invalidDataText}</H3>;
+    return (
+      <ResultContainer>
+        <H3>{invalidDataText}</H3>
+      </ResultContainer>
+    );
   }
   // TODO: remplacer par des span +++ stylisés bold
   return (
-    <HorizontalFlexbox>
-      <H3>{resultText0}</H3>
-      <H3 bold margin="0 5px 0 5px">
-        {period.from.replace(".", ",")}
+    <ResultContainer>
+      <H3>
+        {resultText0}
+        <Bold>{period.from.replace(".", ",")}</Bold>
+        {resultText1}
+        <Bold>{period.to.replace(".", ",")}</Bold>
+        {resultText2}
+        <Bold>{area.replace(".", ",")}</Bold>
+        {resultText3}
       </H3>
-      <H3>{resultText1}</H3>
-      <H3 bold margin="0 5px 0 5px">
-        {period.to.replace(".", ",")}
-      </H3>
-      <H3>{resultText2}</H3>
-      <H3 bold margin="0 5px 0 5px">
-        {area.replace(".", ",")}
-      </H3>
-      <H3>{resultText3}</H3>
-    </HorizontalFlexbox>
+    </ResultContainer>
   );
 };
+
+const Bold: React.FC = styled.span`
+  font-weight: 700;
+`;
 
 export default Result;

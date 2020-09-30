@@ -44,7 +44,7 @@ const theme = {
   },
   backgroundColors: {
     card: "white",
-    main: "#FCF7F2",
+    main: "#FFFCF5",
   },
 };
 

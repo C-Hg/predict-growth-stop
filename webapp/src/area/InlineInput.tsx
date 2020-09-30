@@ -36,7 +36,7 @@ interface StyledInputProps {
 
 const StyledInput = styled.input<StyledInputProps>`
   align-items: center;
-  background-color: ${(props) => props.theme.backgroundColors.main};
+  background-color: transparent;
   border-style: solid;
   border-width: 0px;
   border-bottom-width: 2px;
@@ -48,11 +48,15 @@ const StyledInput = styled.input<StyledInputProps>`
   font-weight: 600;
   justify-content: "flex-start";
 
-  width: 50px;
-  margin-right: 10px;
-  margin-left: 10px;
+  width: 40px;
+  margin-right: 2px;
+  margin-left: 2px;
   text-align: center;
   padding: 0px;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   ${device.mobile} {
     font-size: 14px;
