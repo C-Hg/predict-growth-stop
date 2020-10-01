@@ -1,16 +1,6 @@
 version: "3"
 
 services:
-  web-app:
-    build:
-      context: ./webapp/
-      dockerfile: Dockerfile.prod
-    container_name: predict-growth-stop-web-app
-    volumes:
-      - webapp-build:/webapp/build
-    environment:
-      BROWSER: "none"
-
   server:
     build:
       context: ./server/
@@ -19,7 +9,7 @@ services:
     environment:
       NODE_ENV: "production"
     volumes:
-      - webapp-build:/server/lib/build
+      - ./webapp/build:/server/lib/build
     ports:
       - 3050:3050
 
