@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier/babel",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["import", "prettier"],
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "info", "error", "debug"] }],
+    "no-param-reassign": "error",
+    "no-return-await": "error",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],    
+    "prettier/prettier": "error",
+    "import/order": ["error", {
+        "groups": ["external", "builtin", "sibling", "parent", "internal", "index"],
+        "newlines-between": "always",
+        "alphabetize": {"order": "asc", "caseInsensitive": false} 
+    }],
+    "import/no-cycle": "error",
+    "import/newline-after-import": "error"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Http server for predict-growth-stop",
+  "main": "server.js",
+  "scripts": {
+    "deploy": "npm run build && npm run serve",
+    "build": "babel src -d lib",
+    "serve": "node lib/server.js"
+  },
+  "author": "Camille Hagenbourger",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.9.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  }
+}

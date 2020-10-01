@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import AddData from "./AddData";
 import { Column } from "./Data.interface";
 import DataGrid from "./DataGrid";
 import Legend from "./Legend";
@@ -23,13 +24,7 @@ const defaultData: Column = {
 };
 
 const Form: React.FC = () => {
-  const initialData: Column[] = [
-    defaultData,
-    defaultData,
-    defaultData,
-    defaultData,
-    defaultData,
-  ];
+  const initialData: Column[] = [defaultData, defaultData, defaultData];
   const [columns, setColumns] = useState<Column[]>(initialData);
   const [from, setFrom] = useState<string>("");
   const [isPeriodValid, setIsPeriodValid] = useState<boolean>(false);
@@ -38,10 +33,10 @@ const Form: React.FC = () => {
   const period: Period = { from, isPeriodValid, to };
   const { area, studiedIntervals } = useAreaBetweenCurves(columns, period);
 
-  // const addColumn = () => {
-  //   const newData: Data[] = [...data, defaultData];
-  //   setData(newData);
-  // };
+  const addColumn = () => {
+    const newData = [...columns, defaultData];
+    setColumns(newData);
+  };
 
   // TODO: validation définitive horizontale (les ages doivent être impérativement croissants)
   const status = checkPeriodStatus(columns, from, to);
@@ -82,6 +77,7 @@ const Form: React.FC = () => {
         <DataGridContainer>
           <Legend />
           <DataGrid data={columns} updateColumn={updateColumn} />
+          {columns.length < 11 && <AddData addColumn={addColumn} />}
         </DataGridContainer>
         <Area
           from={from}

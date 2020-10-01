@@ -12,7 +12,6 @@ const ChartCard: React.FC = styled.div`
 
   background-color: ${(props) => props.theme.backgroundColors.card};
   margin: 10px auto 30px auto;
-  padding: 10px;
 
   box-shadow: 0px 0px 10px ${theme.colors.lightestGrey};
   border-radius: ${CARD_BORDER_RADIUS};
@@ -26,7 +25,7 @@ const ChartCard: React.FC = styled.div`
 
   ${device.desktop} {
     padding-bottom: 20px;
-    padding-top: 20px;
+    padding-top: 30px;
   }
 `;
 

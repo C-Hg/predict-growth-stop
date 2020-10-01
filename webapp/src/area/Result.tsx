@@ -5,7 +5,6 @@ import { Period } from "./Area.interface";
 import ResultContainer from "./ResultContainer.styled";
 
 import H3 from "../components/common/H3.styled";
-import HorizontalFlexbox from "../components/common/HorizontalFlexbox.styled";
 
 interface Props {
   area: string;
@@ -13,11 +12,11 @@ interface Props {
 }
 
 const invalidDataText =
-  "Insérez vos données ci-dessous pour évaluer le risque d'arrêt de croissance (maximum 12 points). " +
+  "Insérez vos données ci-dessous pour évaluer le risque d'arrêt de croissance. " +
   "Les âges doivent être en années et les poids en kg. " +
   "Enfin, sélectionnez l'intervalle à étudier.";
-const resultText0 = "L'aire entre les courbes de ";
-const resultText1 = " ans à ";
+const resultText0 = "L'aire sous la courbe entre ";
+const resultText1 = " et ";
 const resultText2 = " ans est égal à ";
 const resultText3 = " kg/an.";
 
@@ -31,7 +30,7 @@ const Result: React.FC<Props> = (props: Props) => {
       </ResultContainer>
     );
   }
-  // TODO: remplacer par des span +++ stylisés bold
+
   return (
     <ResultContainer>
       <H3>

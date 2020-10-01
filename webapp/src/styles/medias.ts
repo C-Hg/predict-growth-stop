@@ -3,7 +3,7 @@ const customMediaQuery = (width: number): string =>
 
 const size = {
   mobile: 300,
-  mobileL: 425,
+  mobileL: 500,
   tablet: 768,
   desktop: 922,
 };

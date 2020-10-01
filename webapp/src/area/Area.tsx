@@ -14,17 +14,46 @@ interface Props {
   to: string;
 }
 
-const areaLegend = "Calculer l'aire sous la courbe entre";
+const areaLegend = "Calculer l'aire sous la courbe entre ";
+const areaLegendMobile1 = "Calculer l'aire sous la courbe";
+const areaLegendMobile2 = "entre ";
 const areaLegendJunction = " et ";
-const areaLegendEnd = " ans.";
+const areaLegendEnd = " ans. ";
 
 const Area: React.FC<Props> = (props: Props) => {
   const { from, isPeriodValid, setFrom, setTo, to } = props;
+  const screenWidth = window.innerWidth;
+  console.info(screenWidth);
+  const isMobile = screenWidth < 500;
+
+  // correctly split the text on mobile
+  if (isMobile) {
+    return (
+      <AreaContainer>
+        <Text>{areaLegendMobile1}</Text>
+        <Text>
+          {areaLegendMobile2}
+          <InlineInput
+            isPeriodValid={isPeriodValid}
+            value={from}
+            updateValue={setFrom}
+          />
+          {areaLegendJunction}
+          <InlineInput
+            isPeriodValid={isPeriodValid}
+            value={to}
+            updateValue={setTo}
+          />
+          {areaLegendEnd}
+        </Text>
+      </AreaContainer>
+    );
+  }
 
   return (
     <AreaContainer>
-      <Text>{areaLegend}</Text>
       <Text>
+        {areaLegend}
         <InlineInput
           isPeriodValid={isPeriodValid}
           value={from}

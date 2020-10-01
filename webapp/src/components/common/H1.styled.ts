@@ -13,12 +13,12 @@ const H1: React.FC = styled.p<{
 
   ${device.mobile} {
     font-size: 18px;
-    margin: 20px 0 10px 0;
+    margin: 18px 0 10px 0;
     padding: 0 10px 0 10px;
   }
 
   ${device.desktop} {
-    font-size: 22px;
+    font-size: 20px;
     margin: 20px 0 20px 0;
     padding: 0 20px 0 20px;
   }
