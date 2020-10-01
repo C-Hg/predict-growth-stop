@@ -23,7 +23,6 @@ const areaLegendEnd = " ans. ";
 const Area: React.FC<Props> = (props: Props) => {
   const { from, isPeriodValid, setFrom, setTo, to } = props;
   const screenWidth = window.innerWidth;
-  console.info(screenWidth);
   const isMobile = screenWidth < 500;
 
   // correctly split the text on mobile
